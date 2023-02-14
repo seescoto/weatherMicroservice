@@ -60,18 +60,6 @@ serverFuncs.printKeys(weather['location'])
 serverFuncs.printKeys(weather['current'])
 ```
 
-After that, run weatherServer.py in a terminal. In a different terminal, run your client script and a text file with the response will be created in the directory.
-
-Terminal 1:
-```sh
-python3 weatherService.py
-```
-
-Terminal 2:
-```sh
-python3 YOUR_CLIENT_SCRIPT.py
-```
-
 ## UML Sequence Diagram
 
 <img src="https://www.planttext.com/api/plantuml/png/NP312i9034Jl-OgmTt-W1wb7iKAnLCzn6t5nsyLiAlZtPeiAUWgyoSo4r5b9T1uZW0QDZEx4f5SMtBHR78ENb5aUmJFs-yO1aDSas1i4doQL5D5rji7Ya39sXoESqpmD94zqbh5Gcy2J5HXhWxzPpoL4NhHsrm2KF5ojYnqh5BxFd3NZG4fGc4cMyQ-K4x-cpDFmwx3amkrUVWk5cB2qLHWJVHorcUq9Bm00">
