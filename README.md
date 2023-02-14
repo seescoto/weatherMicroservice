@@ -22,17 +22,23 @@ pip install -r requirements.txt
 
 ## Requesting data
 
-To get weather in a location for the next x days, you want to request "place, x".Data sent through ZMQ has to be sent in bytes, so be sure to encode it in one of two ways:
+To get weather in a location for the next x days, you want to request "place, x" through a client script. (Basic setup with commentary found in weatherClient.py) Data sent through ZMQ has to be sent in bytes, so be sure to encode it in one of two ways:
 
->socket.send(b'place,  x')       #converts to binary
->socket.send('place, x'.encode('ASCII'))     #also converts to binary
+```python
+socket.send(b'place,  x')       #converts to binary
+socket.send('place, x'.encode('ASCII'))     #also converts to binary
+```python
 
 You can request a place by naming a city, 
->socket.send(b'London, 7')    #weather in London for this week
-or by using a zipcode/postalcode.
->socket.send(b'20500, 7')     #weather in Washington, DC for this week
->socket.send(b'EC3M, 7')      #weather in a subset of London for this week
+```python
+socket.send(b'London, 7')    #weather in London for this week
+```
 
+or by using a zipcode/postalcode.
+```python
+socket.send(b'20500, 7')     #weather in Washington, DC for this week
+socket.send(b'EC3M, 7')      #weather in a subset of London for this week
+```
 ## Receiving data
 
 Once you've requested data, the server will return a pickle file in 'weather.pickle' that contains a nested dictionary with information on the location, the current weather, and the forecasted weather. Load the dictionary into your script like this:
@@ -65,3 +71,7 @@ Terminal 2:
 ```sh
 python3 YOUR_CLIENT_SCRIPT.py
 ```
+
+## UML Sequence Diagram
+
+<img src="https://www.planttext.com/api/plantuml/png/NP312i9034Jl-OgmTt-W1wb7iKAnLCzn6t5nsyLiAlZtPeiAUWgyoSo4r5b9T1uZW0QDZEx4f5SMtBHR78ENb5aUmJFs-yO1aDSas1i4doQL5D5rji7Ya39sXoESqpmD94zqbh5Gcy2J5HXhWxzPpoL4NhHsrm2KF5ojYnqh5BxFd3NZG4fGc4cMyQ-K4x-cpDFmwx3amkrUVWk5cB2qLHWJVHorcUq9Bm00">
