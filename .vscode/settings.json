@@ -1,5 +1,0 @@
-{
-   "python.linting.pylintEnabled": true,
-   "python.linting.enabled": false,
-   "python.analysis.extraPaths": ["/Library/Frameworks/Python.framework/Versions/3.9/bin"]
-}
