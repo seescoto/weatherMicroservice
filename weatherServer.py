@@ -31,19 +31,13 @@ while True:
    message = bytes.decode(message)
    place, days = message.split(',') 
 
-   #check what type of place was provided 
-   #lat/long degrees in format: lat/long
-   if '.' in place:
-      lat, long = place.split('/') 
-      
+   #get response 
+   try:
+      response = apiInstance.forecast(place, days) 
+      print(response)
+   except ApiException as e:
+      pprint("Exception calling APIsApi -> forecast_weather: %s \n" % e)
 
-query = 'London' #can pass zip code / postal code / lat and long degrees / city
-days = 3 #number of days of weather to forecast 
-hour = 12 #hour in military time
+   time.sleep(1)  
 
-#get forecast
-try:
-   response = apiInstance.forecast(query, days) 
-   pprint(response)
-except ApiException as e:
-   print("Exception calling APIsApi -> forecast_weather: %s \n" % e)
+   socket.send(bytes(response, 'utf-8'))
