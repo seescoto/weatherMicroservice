@@ -68,9 +68,10 @@ def toDict(response):
       
    return newDict
 
-   
+def printKeys(dictionary):
+   keyPrintHelper(dictionary,0)
 
-def printKeys(dictionary, sublevel):
+def keyPrintHelper(dictionary, sublevel):
    #prints keys of a dictionary, even if it's nested
    #(recursive)
    #sublevel > 0 means there will be sublevel tabs before the printed values
@@ -80,7 +81,7 @@ def printKeys(dictionary, sublevel):
       if type(dictionary[key]) == dict:
          print()
          print(f"{tabs} subdictionary {key}:")
-         printKeys(dictionary[key], sublevel + 1)
+         keyPrintHelper(dictionary[key], sublevel + 1)
       else:
          print(tabs, key)
 

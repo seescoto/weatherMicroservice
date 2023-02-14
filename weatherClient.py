@@ -23,11 +23,13 @@ with open('weather.pickle', 'rb') as infile:
    weather = pickle.load(infile)
 
 #can now explore nested dictionary 
-#subdictionaries in weather['location'], weather['current'], and weather['forecast']
+#subdictionaries in weather['_location'], weather['_current'], and weather['_forecast']
 
 #print(f"In {weather['location']['_name']} the temperature is {weather['current']['_temp_c']} degrees celcius" )
 
 #prints all keys in dictionary, including nested ones, so you can see what's available
 #very long since weather by the hour (and day) is included, but this will give you an idea of what's in it
 #to print without the days/hours, print weather['location'] and weather['current'] only
-serverFuncs.printKeys(weather, 0)
+serverFuncs.printKeys(weather)
+#serverFuncs.printKeys(weather['location'])
+#serverFuncs.printKeys(weather['current'])
