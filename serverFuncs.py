@@ -53,5 +53,15 @@ def convertToDict(response):
 
    return weatherDict
 
-   
+def printKeys(dictionary):
+   #prints keys of a dictionary, even if it's nested
+   # #(recursive)
+   for key in dictionary:
+      if type(dictionary[key]) == dict:
+         print(f"subdictionary {key}:")
+         printKeys(dictionary[key])
+         print()
+      else:
+         print(key)
+
 

@@ -8,11 +8,19 @@ After cloning the repository to your machine, you need to sign up for a free [we
 ```python
 apiKey = 'YOUR_API_KEY'
 ```
+
 Once this is done, download swagger_client to access the API by running this in the terminal:
 
 ```sh
 pip install git+https://github.com/weatherapicom/python.git
 ```
+
+Install remaining requirements:
+```sh
+pip install -r requirements.txt
+```
+
+
 
 After that, run weatherServer.py in a terminal. In a different terminal, run your client script and a text file with the response will be created in the directory.
 

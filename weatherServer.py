@@ -1,17 +1,20 @@
 ####
 #sending/receiving data to audrie's weather app using weatherapi.com and zmq 
 
-#weather api stuff
+#weather api
 from __future__ import print_function
 from pprint import pprint
 import swagger_client 
 from swagger_client.rest import ApiException 
-import config #has api key
-import serverFuncs #additional functions for converting api response for the client
 
-#zmq stuff
+#zmq 
 import zmq
 import time
+
+#additional 
+import config #has api key
+import serverFuncs #additional functions for converting api response for the client
+import pickle 
 
 #set up communication between server/client 
 context = zmq.Context()
@@ -27,20 +30,23 @@ apiInstance = swagger_client.APIsApi(swagger_client.ApiClient(configuration))
 
 #get request from client
 while True:
-   #receive message in format place, days
+   #receive message in format [place, days]
    message = socket.recv() 
    message = bytes.decode(message)
    place, days = message.split(',') 
 
-   #get response 
+
    try:
+      #get response, convert to dictionary
       response = apiInstance.forecast_weather(place, days)
       response = serverFuncs.convertToDict(response)
-      pprint(response.keys())
-      pprint(response['location'].keys())
+      #save dictionary in pickle file 
+      with open('weatherDict.pickle', 'wb') as outfile:
+         pickle.dump(response, outfile, protocol=pickle.HIGHEST_PROTOCOL)
+
    except ApiException as e:
       pprint("Exception calling APIsApi -> forecast_weather: %s \n" % e)
 
    time.sleep(1)  
 
-   socket.send(b'response')
+   socket.send(b'Data in file \"weatherDict.pickle\".')
