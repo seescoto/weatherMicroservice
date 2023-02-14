@@ -15,3 +15,13 @@ pip install git+https://github.com/weatherapicom/python.git
 ```
 
 After that, run weatherServer.py in a terminal. In a different terminal, run your client script and a text file with the response will be created in the directory.
+
+Terminal 1:
+```sh
+python3 weatherService.py
+```
+
+Terminal 2:
+```sh
+python3 YOUR_CLIENT_SCRIPT.py
+```
