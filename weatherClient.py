@@ -8,8 +8,9 @@ context = zmq.Context()
 socket = context.socket(zmq.REQ)
 socket.connect("tcp://localhost:5555")
 
-socket.send(b"London, 3")
-
+#example getting weather for next three days in london
+socket.send(b"22181, 3")
 #  Get the reply.
 message = socket.recv()
 print(f"Received reply \n [ {bytes.decode(message)} ]")
+
