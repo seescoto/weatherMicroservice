@@ -39,9 +39,9 @@ while True:
    try:
       #get response, convert to dictionary
       response = apiInstance.forecast_weather(place, days)
-      response = serverFuncs.convertToDict(response)
+      response = serverFuncs.toWeatherDict(response)
       #save dictionary in pickle file 
-      with open('weatherDict.pickle', 'wb') as outfile:
+      with open('weather.pickle', 'wb') as outfile:
          pickle.dump(response, outfile, protocol=pickle.HIGHEST_PROTOCOL)
 
    except ApiException as e:
@@ -49,4 +49,4 @@ while True:
 
    time.sleep(1)  
 
-   socket.send(b'Data in file \"weatherDict.pickle\".')
+   socket.send(b'Data in file \"weather.pickle\".')

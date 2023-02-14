@@ -11,8 +11,7 @@
 # Built Visual Studio Code Extensions
 *.vsix
 
-#python cache 
+#other specific files/folders 
 __pycache__
-
-#microservice - holds api key 
 config.py 
+weather.pickle

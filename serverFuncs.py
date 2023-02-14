@@ -13,55 +13,75 @@ def isStatic(variable):
    
    return ret
 
-def convertToDict(response):
+def toWeatherDict(response):
    #response is of class swagger_client.models
    #goes through relevant properties and creates a nested dictionary 
-   weatherDict = {} 
+   weatherDict = {'location': toDict(response.location), 
+                  'current': toDict(response.current),
+                  'forecast': toDict(response.forecast)} 
    
-   #location info
-   #vars(x) returns all properties of x, use this to make dictionary
-   #delete all with unusable data
-   locationDict= vars(response.location)
-   toPop =[]
-   for key in locationDict:
-      if not isStatic(locationDict[key]) or locationDict[key] == None:
-         toPop.append(key)
-   for k in toPop:
-      locationDict.pop(k)
-
-   #weather of today
-   currDict = vars(response.current) 
-   toPop =[]
-   for key in currDict:
-      if not isStatic(currDict[key] or currDict[key] == None):
-         toPop.append(key)
-   for k in toPop:
-      currDict.pop(k)
-
-   #weather for the next x days (specified in request)
-   forecastDict = vars(response.forecast)
-   toPop = []
-   for key in forecastDict:
-      if not isStatic(forecastDict[key] or forecastDict[key] == None):
-         toPop.append(key)
-   for k in toPop:
-      forecastDict.pop(k)
-
-   weatherDict['location'] = locationDict 
-   weatherDict['current'] = currDict
-   weatherDict['forecast'] = forecastDict
+   
+   
+   #weatherDict['location'] = toDict(response.location)
+   #weatherDict['current'] = toDict(response.current)
+   #weatherDict['forecast'] = toDict(response.forecast)
 
    return weatherDict
 
-def printKeys(dictionary):
+
+def toDict(response):
+   #generic making of dictionary from a property of swagger_client.models
+   #recursive, allows for double, triple, etc. nested dicts
+
+   if isStatic(response):
+      newDict = response
+   
+   #test if it's a list, then the keys will be 0, 1, etc. 
+   elif type(response) == list:
+      newDict = {}
+      for i in range(len(response)):
+         newDict[i] = toDict(response[i])
+         if newDict[i] == None:
+            toPop.append(i)
+
+      #delete nones
+      for key in toPop:
+         newDict.pop(i)
+
+   else:
+      try:
+         newDict = vars(response)
+         toPop =[]
+
+         for key in newDict:
+            newDict[key] = toDict(newDict[key])
+            #if the value is none add it to a list to delete
+            if newDict[key] == None:
+               toPop.append(key)
+
+         #delete all in toPop 
+         for key in toPop:
+            newDict.pop(key)
+
+      except TypeError:
+         newDict = None #if type error, return none so key/val pair will be deleted later
+      
+   return newDict
+
+   
+
+def printKeys(dictionary, sublevel):
    #prints keys of a dictionary, even if it's nested
-   # #(recursive)
+   #(recursive)
+   #sublevel > 0 means there will be sublevel tabs before the printed values
+   tabs = "\t" * sublevel
+
    for key in dictionary:
       if type(dictionary[key]) == dict:
-         print(f"subdictionary {key}:")
-         printKeys(dictionary[key])
          print()
+         print(f"{tabs} subdictionary {key}:")
+         printKeys(dictionary[key], sublevel + 1)
       else:
-         print(key)
+         print(tabs, key)
 
 
