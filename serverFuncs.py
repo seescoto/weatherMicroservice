@@ -33,6 +33,8 @@ def toDict(response):
    #generic making of dictionary from a property of swagger_client.models
    #recursive, allows for double, triple, etc. nested dicts
 
+   toPop = []
+
    if isStatic(response):
       newDict = response
    
@@ -44,15 +46,13 @@ def toDict(response):
          if newDict[i] == None:
             toPop.append(i)
 
-      #delete nones
+      #delete all in toPop
       for key in toPop:
          newDict.pop(i)
 
    else:
       try:
          newDict = vars(response)
-         toPop =[]
-
          for key in newDict:
             newDict[key] = toDict(newDict[key])
             #if the value is none add it to a list to delete
