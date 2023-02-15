@@ -19,8 +19,7 @@ print("\n")
 
 
 #open the dictionary with the data from your request 
-with open('weather.pickle', 'rb') as infile:
-   weather = pickle.load(infile)
+weather = serverFuncs.getWeather()
 
 #can now explore nested dictionary 
 #subdictionaries in weather['_location'], weather['_current'], and weather['_forecast']

@@ -35,11 +35,11 @@ while True:
    message = bytes.decode(message)
    place, days = message.split(',') 
 
-
    try:
       #get response, convert to dictionary
       response = apiInstance.forecast_weather(place, days)
       response = serverFuncs.toWeatherDict(response)
+
       #save dictionary in pickle file 
       with open('weather.pickle', 'wb') as outfile:
          pickle.dump(response, outfile, protocol=pickle.HIGHEST_PROTOCOL)
@@ -49,4 +49,4 @@ while True:
 
    time.sleep(1)  
 
-   socket.send(b'Data in file \"weather.pickle\".')
+   socket.send(b'Data saved. Call serverFuncs.getWeather() to return a dictionary.')

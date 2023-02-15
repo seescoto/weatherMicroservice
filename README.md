@@ -44,8 +44,7 @@ socket.send(b'EC3M, 7')      #weather in a subset of London for this week
 Once you've requested data, the server will return a pickle file in 'weather.pickle' that contains a nested dictionary with information on the location, the current weather, and the forecasted weather. Load the dictionary into your script like this:
 
 ```python
-with open('weather.pickle', 'rb') as infile:
-   weather = pickle.load(infile)
+weather = serverFuncs.getWeather()
 ```
 To print out all the keys so you can get an idea of what information you have access to, run this:
 

@@ -1,10 +1,10 @@
 ###
 #helper functions for weather microservice
 #cleans up the server code for easier understanding
+import pickle
 
 def isStatic(variable):
    #returns if the variable is a non static variable (anything thats not int, float, str, etc.)
-   #so we dont have a list as a dictionary key
    ret = False
    t = type(variable) 
 
@@ -19,12 +19,6 @@ def toWeatherDict(response):
    weatherDict = {'location': toDict(response.location), 
                   'current': toDict(response.current),
                   'forecast': toDict(response.forecast)} 
-   
-   
-   
-   #weatherDict['location'] = toDict(response.location)
-   #weatherDict['current'] = toDict(response.current)
-   #weatherDict['forecast'] = toDict(response.forecast)
 
    return weatherDict
 
@@ -46,10 +40,6 @@ def toDict(response):
          if newDict[i] == None:
             toPop.append(i)
 
-      #delete all in toPop
-      for key in toPop:
-         newDict.pop(i)
-
    else:
       try:
          newDict = vars(response)
@@ -59,19 +49,19 @@ def toDict(response):
             if newDict[key] == None:
                toPop.append(key)
 
-         #delete all in toPop 
-         for key in toPop:
-            newDict.pop(key)
-
       except TypeError:
          newDict = None #if type error, return none so key/val pair will be deleted later
-      
+
+   #delete all in toPop 
+   for key in toPop:
+      newDict.pop(key)
    return newDict
 
 def printKeys(dictionary):
    keyPrintHelper(dictionary,0)
 
 def keyPrintHelper(dictionary, sublevel):
+
    #prints keys of a dictionary, even if it's nested
    #(recursive)
    #sublevel > 0 means there will be sublevel tabs before the printed values
@@ -85,4 +75,12 @@ def keyPrintHelper(dictionary, sublevel):
       else:
          print(tabs, key)
 
+def getWeather():
+   #after pickle has been saved, load it and return so user can do it easily 
+   try:
+      with open('weather.pickle', 'rb') as infile:
+         weather = pickle.load(infile)
+   except:
+      weather = None 
 
+   return weather
