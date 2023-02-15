@@ -54,7 +54,7 @@ To print out all the keys so you can get an idea of what information you have ac
 serverFuncs.printKeys(weather)
 ```
 
-Be warned, thuogh, since the forecasted weather gives updates by the day and hour, the output will be very long with many subdictionaries. If you only want to print the the location information and current weather, run this:
+Be warned, though, since the forecasted weather gives updates by the day and hour, the output will be very long with many subdictionaries. If you only want to print the the location information and current weather, run this:
 
 ```python
 serverFuncs.printKeys(weather['location'])
