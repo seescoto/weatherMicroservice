@@ -27,14 +27,16 @@ To get weather in a location for the next x days, you want to request "place, x"
 ```python
 socket.send(b'place,  x')       #converts to binary
 socket.send('place, x'.encode('ASCII'))     #also converts to binary
-```python
+```
 
 You can request a place by naming a city, 
+
 ```python
 socket.send(b'London, 7')    #weather in London for this week
 ```
 
 or by using a zipcode/postalcode.
+
 ```python
 socket.send(b'20500, 7')     #weather in Washington, DC for this week
 socket.send(b'EC3M, 7')      #weather in a subset of London for this week
