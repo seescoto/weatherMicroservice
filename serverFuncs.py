@@ -36,9 +36,9 @@ def toDict(response):
    elif type(response) == list:
       newDict = {}
       for i in range(len(response)):
-         newDict[i] = toDict(response[i])
-         if newDict[i] == None:
-            toPop.append(i)
+         newDict[str(i)] = toDict(response[i])
+         if newDict[str(i)] == None:
+            toPop.append(str(i))
 
    else:
       try:
