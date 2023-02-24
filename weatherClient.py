@@ -29,6 +29,8 @@ weather = serverFuncs.getWeather()
 #prints all keys in dictionary, including nested ones, so you can see what's available
 #very long since weather by the hour (and day) is included, but this will give you an idea of what's in it
 #to print without the days/hours, print weather['location'] and weather['current'] only
-serverFuncs.printKeys(weather)
+#serverFuncs.printKeys(weather)
 #serverFuncs.printKeys(weather['location'])
 #serverFuncs.printKeys(weather['current'])
+
+print(weather['forecast']['_forecastday']['0']['_day']['_maxtemp_f'])
